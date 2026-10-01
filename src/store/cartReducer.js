@@ -2,6 +2,8 @@ const initialState = {
   items: [],
   total: 0,
   itemCount: 0,
+  discount: null,
+  discountedTotal: null,
 };
 
 export function cartReducer(state = initialState, action) {
@@ -30,6 +32,18 @@ export function cartReducer(state = initialState, action) {
         total: filtered.reduce((s, i) => s + i.price * i.qty, 0),
         itemCount: filtered.reduce((s, i) => s + i.qty, 0),
       };
+    }
+
+    case 'APPLY_DISCOUNT': {
+      state.discount = action.payload;
+      state.discountedTotal = state.total * (1 - action.payload.percent / 100);
+      return state;
+    }
+
+    case 'REMOVE_DISCOUNT': {
+      state.discount = null;
+      state.discountedTotal = null;
+      return state;
     }
 
     case 'CLEAR_CART':

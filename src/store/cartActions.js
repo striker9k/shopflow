@@ -8,6 +8,15 @@ export const removeItem = (id) => ({
   payload: id,
 });
 
+export const applyDiscount = (code, percent) => ({
+  type: 'APPLY_DISCOUNT',
+  payload: { code, percent },
+});
+
+export const removeDiscount = () => ({
+  type: 'REMOVE_DISCOUNT',
+});
+
 export const clearCart = () => ({
   type: 'CLEAR_CART',
 });
