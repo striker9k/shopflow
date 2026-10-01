@@ -24,6 +24,12 @@ export function cartReducer(state = initialState, action) {
       };
     }
 
+    case 'APPLY_DISCOUNT': {
+      state.discount = action.payload;
+      state.total = state.total * (1 - action.payload.percentage / 100);
+      return state;
+    }
+
     case 'CLEAR_CART':
       return { ...initialState };
 
